@@ -17,13 +17,13 @@ def check_license (read_file):
     with open(read_file,'r') as file:
         for line in file:
             if not line.startswith('------'):
-                test = re.split(r'\s{2,}', line)
-                if test[0].startswith("Licensed Feature"):
-                    d = [el for el in test]
-                elif test[0].startswith("AP Count"):
-                    e = [el for el in test]
+                data = re.split(r'\s{2,}', line)
+                if data[0].startswith("Licensed Feature"):
+                    key = [some for some in data]
+                elif data[0].startswith("AP Count"):
+                    value = [some for some in test]
 
-    my_dict = dict(zip(d, e))
+    my_dict = dict(zip(key, value))
 
 
     difference = float(my_dict['Max Count']) - float(my_dict['Current Count'])
@@ -37,3 +37,13 @@ def check_license (read_file):
     print(' ')
     print(percentleft)
     if percentleft > 80:
+        print('less then 20% left!!')
+    return;
+
+if __name__ == '__main__':
+    try:
+        user_input = input("Enter text file name:")
+        check_license(user_input)
+    except:
+        print("Entered file does not exist!")
+    
